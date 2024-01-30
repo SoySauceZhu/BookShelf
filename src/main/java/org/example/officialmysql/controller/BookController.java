@@ -1,37 +1,31 @@
 package org.example.officialmysql.controller;
 
 import org.example.officialmysql.entities.Book;
-import org.example.officialmysql.service.BookRepository;
+import org.example.officialmysql.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/books")
 public class BookController {
-    private final BookRepository bookRepository;
+    private final BookService bookService;
 
     @Autowired
-    public BookController(BookRepository bookRepository) {
-        this.bookRepository = bookRepository;
+    public BookController(BookService bookService) {
+        this.bookService = bookService;
     }
 
     @GetMapping()
-    public @ResponseBody Iterable<Book> getBooks() {
-        return bookRepository.findAll();
+    public @ResponseBody Iterable<Book> getAllBooks() {
+        return bookService.findAll();
     }
 
     @PostMapping("/add")
-    public @ResponseBody String addNewUser(@RequestParam Long id, @RequestParam String title) {
-        Book n = new Book();
-        n.setName(title);
-        n.setId(id);
-        bookRepository.save(n);
-        return "Saved";
+    public @ResponseBody String addNewBook(@RequestParam String title, @RequestParam String author, @RequestParam String isbn) {
+        Book n = new Book(title, isbn, author);
+        bookService.save(n);
+        return "\nSuccessfully Saved :\t" + n;
     }
 
-    @GetMapping("/find")
-    public Book findByName(@RequestParam String title) {
-        return bookRepository.findByName(title);
-    }
 }
 

@@ -6,7 +6,7 @@ import lombok.Data;
 
 @Data
 @Entity // Hibernate will automatically translate entity Book to a table
-@Table(name = "Book_db")
+@Table(name = "Book_table")
 public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "book_sequence")
