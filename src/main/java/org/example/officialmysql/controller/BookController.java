@@ -44,7 +44,11 @@ public class BookController {
         } else if (isbn.isEmpty()) {
             return bookService.findByName(title);
         }
+<<<<<<< HEAD
         return bookService.findByName(title);
+=======
+        return Optional.empty();
+>>>>>>> 6fefe7a671996355d6542e6d2d716da33562e79a
     }
 
 
