@@ -20,17 +20,21 @@ public class BookService {
         return bookRepository.findAll();
     }
 
+    public Optional<Book> findByName(String title) {
+        return bookRepository.findBookByName(title);
+    }
+
+    public Optional<Book> findByIsbn(String isbn) {
+        return bookRepository.findBookByIsbn(isbn);
+    }
+
     public void save(Book book) {
         bookRepository.save(book);
         System.out.println("\nSuccessfully Saved :\t" + book);
     }
 
-    public void deleteAll(){
+    public void deleteAll() {
         bookRepository.deleteAll();
-    }
-
-    public Optional<Book> findById(Long id) {
-        return bookRepository.findById(id);
     }
 
 }
